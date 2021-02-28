@@ -11,10 +11,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "pessoa")
+@Table(name = "cliente")
 public class Cliente implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +28,15 @@ public class Cliente implements Serializable {
     private String cpf; 
     private double salario; 
     
+    @OneToOne(cascade = CascadeType.ALL)
+    private Endereco receitas;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Emprestimo emprestimos;
+
+    public Cliente() {
+    }
+    
  
     public Cliente(String nome, String email, String cpf, double salario) { 
         this.nome = nome; 
@@ -34,6 +44,30 @@ public class Cliente implements Serializable {
         this.cpf = cpf; 
         this.salario = salario; 
     } 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Endereco getReceitas() {
+        return receitas;
+    }
+
+    public void setReceitas(Endereco receitas) {
+        this.receitas = receitas;
+    }
+
+    public Emprestimo getEmprestimo() {
+        return emprestimos;
+    }
+
+    public void setEmprestimo(Emprestimo emprestimos) {
+        this.emprestimos = emprestimos;
+    }
  
     public String getNome() { 
         return nome; 
