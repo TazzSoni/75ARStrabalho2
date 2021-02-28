@@ -1,10 +1,10 @@
-package com.ars.apirest;
+package com.gerenciador.apigerenciador;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ApirestApplicationTests {
+class ApigerenciadorApplicationTests {
 
 	@Test
 	void contextLoads() {
