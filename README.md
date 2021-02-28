@@ -4,7 +4,7 @@
  
  ## ✒️ Autores
 
-* **Rodrigo Souza Tassoni** - *tazzsoni@gmail.com* - [rodrigosouzatassoni](https://github.com/TazzSoni)
+* **Rodrigo Souza Tassoni** - *tazzsoni@gmail.com* - [TazzSoni](https://github.com/TazzSoni)
 
 ## 🚀 Atividades a serem implementadas
 
