@@ -20,9 +20,14 @@ public class WebServiceA {
      * This is a sample web service operation
      */
     @WebMethod(operationName = "verApto")
-    public String verApto(@WebParam(name = "valor") String valor) {
+    public String verApto(@WebParam(name = "valor") String valor, @WebParam(name = "renda") String renda) {
         int newValor = Integer.parseInt(valor);
-        
-        return "";
+        int newRenda = Integer.parseInt(renda);
+        newRenda = ((newRenda / 100)*30);
+        if(newValor > newRenda ){
+            return "APROVADO";
+        }else{
+        return "REPROVADO";
+        }
     }
 }
