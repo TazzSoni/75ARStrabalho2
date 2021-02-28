@@ -13,5 +13,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Rodrigo
  */
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+
+     Cliente findById(long id);
     
 }
