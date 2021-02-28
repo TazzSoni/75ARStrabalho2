@@ -5,6 +5,7 @@
  */
 package com.gerenciador.apigerenciador.resources;
 
+import Validador.ValidarCPF;
 import com.gerenciador.apigerenciador.models.Cliente;
 import com.gerenciador.apigerenciador.repository.ClienteRepository;
 import java.util.List;
@@ -42,24 +43,28 @@ public class ClienteResource {
 
     @PostMapping("/cliente")
     public String createCliente(@RequestBody Cliente cliente) {
-        String result = "";
-        try { // Call Web Service Operation
-            servicos.WebServiceA_Service service = new servicos.WebServiceA_Service();
-            servicos.WebServiceA port = service.getWebServiceAPort();
-            // TODO initialize WS operation arguments here
-            double valor = cliente.getEmprestimo().getValorParcelas();
-            double renda = cliente.getSalario();
-            // TODO process result here
-            result = port.verApto(valor, renda);
+        if (ValidarCPF.verificaCPF(cliente.getCpf())) {
+            String result = "";
+            try { // Call Web Service Operation
+                servicos.WebServiceA_Service service = new servicos.WebServiceA_Service();
+                servicos.WebServiceA port = service.getWebServiceAPort();
+                // TODO initialize WS operation arguments here
+                double valor = cliente.getEmprestimo().getValorParcelas();
+                double renda = cliente.getSalario();
+                // TODO process result here
+                result = port.verApto(valor, renda);
 
-        } catch (Exception ex) {
-            // TODO handle custom exceptions here
-        }
-        if (result.equals("APROVADO")) {
-            clienteRepository.save(cliente);
-            return "Emprestimo Aprovado, cliente cadastrado";
+            } catch (Exception ex) {
+                // TODO handle custom exceptions here
+            }
+            if (result.equals("APROVADO")) {
+                clienteRepository.save(cliente);
+                return "Emprestimo Aprovado, cliente cadastrado";
+            } else {
+                return "Emprestimo reprovado!!";
+            }
         } else {
-            return "Emprestimo reprovado!!";
+            return "CPF invalido!!";
         }
 
     }
