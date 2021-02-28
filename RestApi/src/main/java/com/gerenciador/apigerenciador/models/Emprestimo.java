@@ -28,6 +28,9 @@ public class Emprestimo implements Serializable {
     private double valor;
     private int qtdParcelas;
 
+    public double getValorParcelas(){
+        return valor / qtdParcelas;
+    }
     public long getId() {
         return id;
     }

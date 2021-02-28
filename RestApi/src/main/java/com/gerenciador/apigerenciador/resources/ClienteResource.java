@@ -24,32 +24,52 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Rodrigo
  */
 @RestController
-@RequestMapping(value="/api")
+@RequestMapping(value = "/api")
 public class ClienteResource {
-    
+
     @Autowired
     ClienteRepository clienteRepository;
-    
+
     @GetMapping("/cliente")
-    public List<Cliente> listaClientes(){
+    public List<Cliente> listaClientes() {
         return clienteRepository.findAll();
     }
-    
+
     @GetMapping("/cliente/{id}")
-    public Cliente getClienteId(@PathVariable(value = "id") long id){
+    public Cliente getClienteId(@PathVariable(value = "id") long id) {
         return clienteRepository.findById(id);
     }
-    
+
     @PostMapping("/cliente")
-    public Cliente createCliente(@RequestBody Cliente cliente) {
-        return clienteRepository.save(cliente);
+    public String createCliente(@RequestBody Cliente cliente) {
+        String result = "";
+        try { // Call Web Service Operation
+            servicos.WebServiceA_Service service = new servicos.WebServiceA_Service();
+            servicos.WebServiceA port = service.getWebServiceAPort();
+            // TODO initialize WS operation arguments here
+            double valor = cliente.getEmprestimo().getValorParcelas();
+            double renda = cliente.getSalario();
+            // TODO process result here
+            result = port.verApto(valor, renda);
+
+        } catch (Exception ex) {
+            // TODO handle custom exceptions here
+        }
+        if (result.equals("APROVADO")) {
+            clienteRepository.save(cliente);
+            return "Emprestimo Aprovado, cliente cadastrado";
+        } else {
+            return "Emprestimo reprovado!!";
+        }
+
     }
-     @PutMapping("/cliente/{nome}")
+
+    @PutMapping("/cliente/{nome}")
     public Cliente editCliente(@PathVariable(value = "nome") String nome, @RequestBody Cliente cliente) {
         return clienteRepository.save(cliente);
     }
-    
-     @DeleteMapping("/cliente/{id}")
+
+    @DeleteMapping("/cliente/{id}")
     public Cliente deleteCliente(@PathVariable(value = "id") long id) {
         Cliente c = clienteRepository.findById(id);
         clienteRepository.delete(c);

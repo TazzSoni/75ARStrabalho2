@@ -29,10 +29,10 @@ public class Cliente implements Serializable {
     private double salario; 
     
     @OneToOne(cascade = CascadeType.ALL)
-    private Endereco receitas;
+    private Endereco endereco;
     
     @OneToOne(cascade = CascadeType.ALL)
-    private Emprestimo emprestimos;
+    private Emprestimo emprestimo;
 
     public Cliente() {
     }
@@ -53,20 +53,20 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    public Endereco getReceitas() {
-        return receitas;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setReceitas(Endereco receitas) {
-        this.receitas = receitas;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Emprestimo getEmprestimo() {
-        return emprestimos;
+        return emprestimo;
     }
 
     public void setEmprestimo(Emprestimo emprestimos) {
-        this.emprestimos = emprestimos;
+        this.emprestimo = emprestimos;
     }
  
     public String getNome() { 
