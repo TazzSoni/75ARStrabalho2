@@ -172,6 +172,37 @@ and open the template in the editor.
                 document.getElementById("parcelas").value = "";
             }
 
+            checkCamps = () => {
+                var x1 = document.getElementById("nome").value;
+                var x2 = document.getElementById("email").value;
+                var x3 = document.getElementById("cpf").value;
+                var x4 = document.getElementById("cep").value;
+                var x5 = document.getElementById("rua").value;
+                var x6 = document.getElementById("bairro").value;
+                var x7 = document.getElementById("cidade").value;
+                var x8 = document.getElementById("salario").value;
+                var x9 = document.getElementById("valor").value;
+                var x0 = document.getElementById("parcelas").value;
+
+                if (
+                        x1 == "" ||
+                        x2 == "" ||
+                        x3 == "" ||
+                        x4 == "" ||
+                        x5 == "" ||
+                        x6 == "" ||
+                        x7 == "" ||
+                        x8 == "" ||
+                        x9 == "" ||
+                        x0 == ""
+                        ) {
+                    alert("Preencha todos os campos!!!")
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
             renderizaCep = (dados) => {
                 if (dados == "Cliente não Encontrado") {
                     alert("Cliente não Encontrado");
@@ -194,6 +225,7 @@ and open the template in the editor.
             ;
 
             salvar = () => {
+                if(checkCamps()){
                 var obj = JSON.stringify({
                     "nome": nome,
                     "email": email,
@@ -217,7 +249,8 @@ and open the template in the editor.
                 xhttp.setRequestHeader("Content-type", "application/json");
                 xhttp.send(obj);
 
-            };
+            }
+        };
 
         </script>
     </body>
